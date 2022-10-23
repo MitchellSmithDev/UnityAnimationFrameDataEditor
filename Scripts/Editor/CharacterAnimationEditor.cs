@@ -209,8 +209,10 @@ public class CharacterAnimationEditor : EditorWindow
         
         if(currentSprite != null)
         {
+            var yOffset = currentSprite.rect.size.y - currentSprite.pivot.y;
+
             Vector2 position = new Vector2(spritePosition.x - currentSprite.pivot.x * spriteScale,
-                                            spritePosition.y - currentSprite.pivot.y * spriteScale);
+                                            spritePosition.y - yOffset * spriteScale);
 
             Vector2 backgroundSize = new Vector2(currentSprite.pixelsPerUnit * backgroundWidth,
                                                 currentSprite.pixelsPerUnit * backgroundHeight);
@@ -235,8 +237,9 @@ public class CharacterAnimationEditor : EditorWindow
 
     void DrawSprite()
     {
+        var yOffset = currentSprite.rect.size.y - currentSprite.pivot.y;
         Rect textureRect = new Rect(Mathf.Floor(spritePosition.x - currentSprite.pivot.x * spriteScale),
-                                    Mathf.Floor(spritePosition.y - currentSprite.pivot.y * spriteScale),
+                                    Mathf.Floor(spritePosition.y - yOffset * spriteScale),
                                     Mathf.Floor(currentSprite.rect.width * spriteScale), Mathf.Floor(currentSprite.rect.height * spriteScale));
         
         Rect textureCoords = new Rect(currentSprite.rect.x / currentSprite.texture.width, currentSprite.rect.y / currentSprite.texture.height,
